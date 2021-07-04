@@ -247,3 +247,30 @@ COLLATE = utf8mb4_0900_ai_ci;
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
+
+INSERT INTO `db_ris`.`roles`
+(`role_id`,
+`name`)
+VALUES (1,'ADMIN');
+INSERT INTO `db_ris`.`roles`
+(`role_id`,
+`name`)
+VALUES (2,'USER');
+INSERT INTO `db_ris`.`roles`
+(`role_id`,
+`name`)
+VALUES (3,'REFERRAL_MD');
+INSERT INTO `db_ris`.`roles`
+(`role_id`,
+`name`)
+VALUES (4,'RECEPTIONIST');
+INSERT INTO `db_ris`.`roles`
+(`role_id`,
+`name`)
+VALUES (5,'TECHNICIAN');
+INSERT INTO `db_ris`.`roles`
+(`role_id`,
+`name`)
+VALUES (6,'RADIOLOGIST');
+
+
