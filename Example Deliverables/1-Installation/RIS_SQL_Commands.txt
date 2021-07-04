@@ -248,6 +248,7 @@ SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 
+//this will add default roles 
 INSERT INTO `db_ris`.`roles`
 (`role_id`,
 `name`)
@@ -272,5 +273,96 @@ INSERT INTO `db_ris`.`roles`
 (`role_id`,
 `name`)
 VALUES (6,'RADIOLOGIST');
+
+// This will default add users
+INSERT INTO `db_ris`.`users`
+(`user_id`,
+`email`,
+`full_name`,
+`username`,
+`password`,
+`enabled`)
+VALUES
+(1,
+'admin@example.com',
+'test admin',
+'admin',
+'$2a$10$AgRydxrwzV3Y1x/TMpK3ouBqO3kRrH3GjJrZx8K3uPUW/1A597P0a',
+1);
+
+INSERT INTO `db_ris`.`users`
+(`user_id`,
+`email`,
+`full_name`,
+`username`,
+`password`,
+`enabled`)
+VALUES
+(2,
+'user@example.com',
+'test user',
+'user',
+'$2a$10$xi8XL27yf/nfudL/pdypauYy1WPVqaAvk3SsxGQBgHC.X9YqeFmuu',
+1);
+
+INSERT INTO `db_ris`.`users`
+(`user_id`,
+`email`,
+`full_name`,
+`username`,
+`password`,
+`enabled`)
+VALUES
+(3,
+'doc@example.com',
+'test doc',
+'doc',
+'M6eVS6jNuRfj8ogNcCzMWekIxq4YHc5nI0gCjFMPGPBv2yzCvnkY2',
+1);
+
+INSERT INTO `db_ris`.`users`
+(`user_id`,
+`email`,
+`full_name`,
+`username`,
+`password`,
+`enabled`)
+VALUES
+(4,
+'receptionist@example.com',
+'test desk',
+'desk',
+'$2a$10$CI1mtcS0YAu9OXkgEdZIwe5osbCeKlMo3B461mfZNdGAIZHFMoMqW',
+1);
+
+INSERT INTO `db_ris`.`users`
+(`user_id`,
+`email`,
+`full_name`,
+`username`,
+`password`,
+`enabled`)
+VALUES
+(5,
+'tech@example.com',
+'test tech',
+'tech',
+'$2a$10$UacnQnZZpHNYUmg6WT//jOk8Dk9E8bmMOpZsKG/noFM8b05G/eOJa',
+1);
+
+INSERT INTO `db_ris`.`users`
+(`user_id`,
+`email`,
+`full_name`,
+`username`,
+`password`,
+`enabled`)
+VALUES
+(6,
+'radio@example.com',
+'test radiologist',
+'radio',
+'$2a$10$LnhwP2IXd5kBcv8ex115mumE62xx1kjBSmTeHYzqsIOgDcMggqHIq',
+1);
 
 
