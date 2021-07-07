@@ -28,7 +28,7 @@ CREATE TABLE IF NOT EXISTS `db_ris`.`alerts` (
   `alert_name` VARCHAR(45) NULL DEFAULT NULL,
   PRIMARY KEY (`alert_id`))
 ENGINE = InnoDB
-AUTO_INCREMENT = 3
+AUTO_INCREMENT = 1
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
 
@@ -50,7 +50,7 @@ CREATE TABLE IF NOT EXISTS `db_ris`.`appointments` (
   `closed` BIT(1) NULL DEFAULT NULL,
   PRIMARY KEY (`appointment_id`))
 ENGINE = InnoDB
-AUTO_INCREMENT = 9
+AUTO_INCREMENT = 1
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
 
@@ -66,7 +66,7 @@ CREATE TABLE IF NOT EXISTS `db_ris`.`diagnostic_reports` (
   `diagnostic` VARCHAR(250) NULL DEFAULT NULL,
   PRIMARY KEY (`diagnostic_report_id`))
 ENGINE = InnoDB
-AUTO_INCREMENT = 9
+AUTO_INCREMENT = 1
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
 
@@ -113,7 +113,7 @@ CREATE TABLE IF NOT EXISTS `db_ris`.`modalities` (
   `name` VARCHAR(25) NULL DEFAULT NULL,
   PRIMARY KEY (`modality_id`))
 ENGINE = InnoDB
-AUTO_INCREMENT = 5
+AUTO_INCREMENT = 1
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
 
@@ -126,7 +126,7 @@ CREATE TABLE IF NOT EXISTS `db_ris`.`order_status` (
   `name` VARCHAR(25) NULL DEFAULT NULL,
   PRIMARY KEY (`order_status_id`))
 ENGINE = InnoDB
-AUTO_INCREMENT = 4
+AUTO_INCREMENT = 1
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
 
@@ -145,7 +145,7 @@ CREATE TABLE IF NOT EXISTS `db_ris`.`orders` (
   `report` INT NULL DEFAULT NULL,
   PRIMARY KEY (`order_id`))
 ENGINE = InnoDB
-AUTO_INCREMENT = 10
+AUTO_INCREMENT = 1
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
 
@@ -163,7 +163,7 @@ CREATE TABLE IF NOT EXISTS `db_ris`.`patients` (
   `ethnicity` VARCHAR(50) NULL DEFAULT NULL,
   PRIMARY KEY (`patient_id`))
 ENGINE = InnoDB
-AUTO_INCREMENT = 13
+AUTO_INCREMENT = 1
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
 
@@ -186,7 +186,7 @@ CREATE TABLE IF NOT EXISTS `db_ris`.`patients_alerts` (
     FOREIGN KEY (`patient_id`)
     REFERENCES `db_ris`.`patients` (`patient_id`))
 ENGINE = InnoDB
-AUTO_INCREMENT = 19
+AUTO_INCREMENT = 1
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
 
@@ -199,7 +199,7 @@ CREATE TABLE IF NOT EXISTS `db_ris`.`roles` (
   `name` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`role_id`))
 ENGINE = InnoDB
-AUTO_INCREMENT = 7
+AUTO_INCREMENT = 1
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
 
@@ -217,7 +217,7 @@ CREATE TABLE IF NOT EXISTS `db_ris`.`users` (
   PRIMARY KEY (`user_id`),
   UNIQUE INDEX `email_UNIQUE` (`email` ASC) VISIBLE)
 ENGINE = InnoDB
-AUTO_INCREMENT = 8
+AUTO_INCREMENT = 1
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
 
@@ -239,7 +239,7 @@ CREATE TABLE IF NOT EXISTS `db_ris`.`users_roles` (
     FOREIGN KEY (`user_id`)
     REFERENCES `db_ris`.`users` (`user_id`))
 ENGINE = InnoDB
-AUTO_INCREMENT = 112
+AUTO_INCREMENT = 100
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
 
