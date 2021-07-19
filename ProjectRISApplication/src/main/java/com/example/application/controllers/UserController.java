@@ -333,7 +333,8 @@ public class UserController {
         User currentUser = userRepository.getUserByUsername(loggedInUser.getName());
     
         model.addAttribute("user", currentUser );
-
+        System.out.println("user_info");
+       
         return "user_info";
     }
     @GetMapping("/appointments")
