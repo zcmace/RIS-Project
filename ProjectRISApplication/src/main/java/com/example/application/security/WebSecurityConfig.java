@@ -42,7 +42,7 @@ class LoginRedirectSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
             .authorizeRequests()
-            .antMatchers("/css/**", "/images/**").permitAll()
+            .antMatchers("/css/**", "/images/**", "/user_info").permitAll()
             .antMatchers("/admin/**").hasAnyAuthority("ADMIN")
             .antMatchers("/referral/**").hasAnyAuthority("ADMIN", "REFERRAL_DOCTOR")
             .antMatchers("/staff/**").hasAnyAuthority("ADMIN", "RECEPTIONIST")
