@@ -97,7 +97,7 @@
               <div class="col-sm-12 modal-tile"  id="ModifyUserModal">
                   <div class="row">
                       <div class="col-sm-12">
-                          <h1 id="UserModalTitle">Modify User<p id="HeadingUser" style="float:right;">Admin</p></h1>
+                          <h1 id="UserModalTitle">User Info for:<p th:text = "${user.getUsername()}" id="HeadingUser" style="float:right;">Username</p></h1>
                       </div>
                   </div>
                   <hr>
@@ -124,10 +124,7 @@
                               <label for="UserEmailInput">Email Address:</label>
                               <input type="text" class="form-control" id="UserEmailInput" th:field="${user.email}" placeholder="example@demo.com"/>
                           </div>
-                          <div class="col-sm-1">
-                              <label for="FullNameInput">Enabled:</label>
-                              <input type="checkbox" class="form-control" id="UserEnabled" th:field="${user.enabled}">
-                          </div>
+                         
                       </div>
                       <br>
                       <div class="row">
