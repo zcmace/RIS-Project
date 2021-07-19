@@ -208,7 +208,24 @@
                                     <label for="AppointmentModalityInput">Modality:</label>
                                     <input type="hidden" id="AppointmentModalityInput" th:field="${appointment.modality}">
                                     <input type="text" class="form-control" id="AppointmentModalityText" readonly>
+                                </div> 
+                                <div class="col-sm-12">
+                                    <h4>Insurance Info</h4>
+                                    <hr>
                                 </div>
+                                <div class="col-sm-4 pad-input">
+                                    <label for="InsuranceEnrolleeNameInput">Enrollee Name:</label>
+                                    <input type="text" class="form-control" id="InsuranceEnrolleeNameInput" placeholder="Enrollee Name" readonly>
+                                </div>
+                                <div class="col-sm-4 pad-input">
+                                    <label for="InsuranceEnrolleeIDInput">Enrollee ID:</label>
+                                    <input type="text" class="form-control" id="InsuranceEnrolleeIDInput" placeholder="Enrollee ID" readonly>
+                                </div>
+                                <div class="col-sm-4 pad-input">
+                                    <label for="InsuranceIssuerInput">Issuer:</label>
+                                    <input type="text" class="form-control" id="InsuranceIssuerInput" placeholder="Issuer" readonly>
+                                </div>
+
                             </div>
                         </div>
                         <br>
