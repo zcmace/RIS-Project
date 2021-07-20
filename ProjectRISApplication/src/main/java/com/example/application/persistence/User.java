@@ -92,6 +92,10 @@ public class User {
       }
       return roleNames;
     }
+
+    public void setRoles(Set<Role> roles){
+      this.roles = roles;
+    }
  
     // remaining getters and setters are not shown for brevity
 }

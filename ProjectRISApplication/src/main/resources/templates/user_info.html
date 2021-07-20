@@ -40,8 +40,59 @@
     ></script>
 
     <link rel="stylesheet" href="/css/styles.css" />
+  <script>
+
+    $(document).ready(function(){  
+
+      function userWarning(warning)
+            {
+                $('#UserWarning').show();
+                $('#UserWarningContent').html(warning);
+            }
+  
+      $('body').on('click', '.saveUserButton', function(event){
+                $('#UserWarning').hide();
+                if($('#UserIDInput').val().length > 0)
+                {
+                    if($('#ChangeUserPassword').val() != $('#ConfirmUserPassword').val())
+                    {
+                        userWarning("Passwords must match");
+                        event.preventDefault();
+                    }
+                }
+                else
+                {
+                    if($('#ChangeUserPassword').val() != $('#ConfirmUserPassword').val())
+                    {
+                        userWarning("Passwords must match");
+                        event.preventDefault();
+                    }
+                    if($('#ChangeUserPassword').val().length <= 0)
+                    {
+                        userWarning("Password cannot be empty");
+                        event.preventDefault();
+                    }
+                    if($('#UsernameInput').val().length <= 0)
+                    {
+                        userWarning("Username cannot be empty");
+                        event.preventDefault();
+                    }
+                }
+            });
+
+        $('.user-password').on('keyup', function(){
+                if($('#ChangeUserPassword').val() == $('#ConfirmUserPassword').val())
+                {
+                    $('#PasswordWarning').hide();
+                }
+                else
+                {
+                    $('#PasswordWarning').show();
+                }
+            });
+        });
+  </script>
   </head>
-  <script></script>
   <body>
     <div class="container" id="ContentWrapper">
       <div class="row">
@@ -144,13 +195,10 @@
                               </div>
                           </div>
                       </div>
-                      <br>
+                    <br>
                       <div class="row">
                           <div class="col-sm-10">
-                              <input type="submit" class="btn btn-md btn-primary saveUserButton" style="float:right; padding-right: 10px;" value="Save Changes"/>
-                          </div>
-                          <div class="col-sm-2">
-                              <input type="button" class="btn btn-md btn-danger close-modal" style="float:right;" value="Cancel"/>
+                              <input type="submit" class="btn btn-md btn-primary saveUserButton" style="float:right; padding-right: 10px;" value="Update Info"/>
                           </div>
                       </div>
                   </form>
