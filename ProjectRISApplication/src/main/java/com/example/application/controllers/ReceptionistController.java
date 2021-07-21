@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.MailSendException;
 
 import com.example.application.persistence.Appointment;
 import com.example.application.repositories.AppointmentRepository;
@@ -59,7 +60,7 @@ public class ReceptionistController {
         
         );
         emailSender.send(message);
-        } catch (Exception exception) {
+        } catch (MailSendException exception) {
             System.out.println(exception.getMessage());
         }
         appointmentRepository.setCheckedInForAppointment(appointment.getId());
