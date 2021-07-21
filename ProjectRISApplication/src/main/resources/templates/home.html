@@ -311,6 +311,7 @@
                                     <th>Appointment ID</th>
                                     <th>Patient</th>
                                     <th>Modality</th>
+                                    <th>Price</th>
                                     <th>Date and Time</th>
                                     <th>Radiologist</th>
                                     <th>Technician</th>
@@ -324,6 +325,7 @@
                                     <td th:text="${appointment.getId()}">Appointment ID</td>
                                     <td th:text="${appointment.getPatientObject().getLast_name()} + ', ' + ${appointment.getPatientObject().getFirst_name()}">Patient</td>
                                     <td th:text="${appointment.getModalityObject().getName()}">Modality</td>
+                                    <td th:text="${appointment.getModalityObject().getPrice()}">Price</td>
                                     <td th:text="${appointment.getDatetime()}">Date and Time</td>
                                     <td th:text="${appointment.getRadiologistObject().getFull_name()}">Radiologist</td>
                                     <td th:text="${appointment.getTechnicianObject().getFull_name()}">Technician</td>
@@ -356,6 +358,7 @@
                                     <th>Appointment ID</th>
                                     <th>Patient</th>
                                     <th>Modality</th>
+                                    <th>Price</th>
                                     <th>Date and Time</th>
                                     <th>Radiologist</th>
                                     <th>Technician</th>
@@ -369,6 +372,7 @@
                                     <td th:text="${appointment.getId()}">Appointment ID</td>
                                     <td th:text="${appointment.getPatientObject().getLast_name()} + ', ' + ${appointment.getPatientObject().getFirst_name()}">Patient</td>
                                     <td th:text="${appointment.getModalityObject().getName()}">Modality</td>
+                                    <td th:text="${appointment.getModalityObject().getPrice()}">Price</td>
                                     <td th:text="${appointment.getDatetime()}">Date and Time</td>
                                     <td th:text="${appointment.getRadiologistObject().getFull_name()}">Radiologist</td>
                                     <td th:text="${appointment.getTechnicianObject().getFull_name()}">Technician</td>
@@ -441,6 +445,7 @@
                                     <th>Appointment ID</th>
                                     <th>Patient</th>
                                     <th>Modality</th>
+                                    <th>Price</th>
                                     <th>Date and Time</th>
                                     <th>Radiologist</th>
                                     <th>Technician</th>
@@ -456,6 +461,7 @@
                                     <td th:text="${appointment.getId()}">Appointment ID</td>
                                     <td th:text="${appointment.getPatientObject().getLast_name()} + ', ' + ${appointment.getPatientObject().getFirst_name}" >-1</td>
                                     <td th:text="${appointment.getModalityObject().getName()}">Modality</td>
+                                    <td th:text="${appointment.getModalityObject().getPrice()}">Price</td>
                                     <td th:text="${appointment.getDatetime()}">Date and Time</td>
                                     <td th:text="${appointment.getRadiologistObject().getFull_name()}">Radiologist</td>
                                     <td th:text="${appointment.getTechnicianObject().getFull_name()}">Technician</td>

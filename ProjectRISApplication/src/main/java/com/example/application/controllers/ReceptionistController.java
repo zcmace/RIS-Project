@@ -39,6 +39,7 @@ public class ReceptionistController {
     @PostMapping("/checkinAppointment")
     public String checkinAppointment(@ModelAttribute("checkin_appointment") Appointment appointment, Model model, BindingResult result)
     {
+        //add method here to send billing statement to patient
         appointmentRepository.setCheckedInForAppointment(appointment.getId());
         return "redirect:/home";
     }
