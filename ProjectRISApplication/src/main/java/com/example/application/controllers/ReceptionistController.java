@@ -14,7 +14,9 @@ import org.springframework.mail.MailSendException;
 
 import com.example.application.persistence.Appointment;
 import com.example.application.repositories.AppointmentRepository;
+import com.example.application.repositories.ModalityRepository;
 import com.example.application.repositories.OrderRepository;
+import com.example.application.persistence.Modality;
 
 @Controller 
 @RequestMapping(path="/staff") // This means URL's start with /admin (after Application path)
@@ -23,6 +25,8 @@ public class ReceptionistController {
     private OrderRepository orderRepository;
     @Autowired
     private AppointmentRepository appointmentRepository;
+    @Autowired
+    private ModalityRepository modalityRepository;
 
     @Autowired
     PasswordEncoder passwordEncoder;
@@ -46,7 +50,17 @@ public class ReceptionistController {
     public String checkinAppointment(@ModelAttribute("checkin_appointment") Appointment appointment, Model model, BindingResult result)
     {
         //add method here to send billing statement to patient
+       
         try{
+            Iterable<Modality> modalList = modalityRepository.findAll();
+
+            Modality appModality = new Modality();
+            for (Modality modality : modalList){
+                if (modality.getId() == appointment.getModality()){
+                    appModality = modality;
+                }
+            }
+
         SimpleMailMessage message = new SimpleMailMessage(); 
         message.setFrom("radiologyinfosystem@gmail.com");
         message.setTo(appointment.getEmailaddress()); 
@@ -54,8 +68,8 @@ public class ReceptionistController {
         message.setText(
             "Appointment Date: " + appointment.getDate() + "\n" +
             "Appointment Time: " + appointment.getTime() + "\n" +
-            "Your " + appointment.getModalityObject().getName() + "will cost " 
-            + appointment.getModalityObject().getPrice() + "\n" +
+            "Your " + appModality.getName() + "will cost " 
+            + appModality.getPrice() + "\n" +
             "Please send payment to Radiology Office"
         
         );
