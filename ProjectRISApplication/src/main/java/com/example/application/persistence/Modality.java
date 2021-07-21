@@ -8,9 +8,9 @@ public class Modality {
     @Column(name = "modality_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private Double price;
+    private String price;
     private String name;
-
+    
 
     public Long getId() {
         return this.id;
@@ -20,7 +20,7 @@ public class Modality {
         return this.name;
     }  
 
-    public Double getPrice(){
+    public String getPrice(){
         return this.price;
     }
 
@@ -32,7 +32,7 @@ public class Modality {
         this.name = name;
     }
 
-    public void setPrice(double price){
+    public void setPrice(String price){
         this.price = price;
     }
 }
