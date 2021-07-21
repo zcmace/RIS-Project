@@ -355,13 +355,20 @@ public class UserController {
     public String updateUser(@ModelAttribute("user") User user, @ModelAttribute("roles") UsersRolesList users_roles,
             Model model, BindingResult result) {
         user.setEnabled(true);
-        
-        System.out.println(usersRolesRepository.findById(user.getUser_id()));
-    
-            List<UsersRoles> rolesList = new LinkedList<>();
-            rolesList.add(new UsersRoles());
+        //next couple lines should make a usable userRolesList for the user. after update info roles should
+        Iterable<UsersRoles> rolesrepo = usersRolesRepository.findAll();
+        List<UsersRoles> list = new LinkedList<>();
 
-            users_roles.setUsers_roles(rolesList);
+        for (UsersRoles ur : rolesrepo){
+            if (ur.getUserid() == user.getUser_id()){
+                list.add(ur);
+            }
+        }
+        //this puts current users_roles as a list into a UsersRolesList object
+        users_roles.setUsers_roles(list);
+
+        
+
 
             Optional<User> find_user = userRepository.findById(user.getUser_id());
             if (find_user.isPresent()) // Find current user
@@ -374,8 +381,20 @@ public class UserController {
                 }
             }
 
-            userRepository.save(user); // Save user first
-        
+          
+            //in the list provided by the users_rolesList object
+            //we delete the role first, save the user object
+            //then add the user_roles object one at a time
+
+            /*userRepository.save(user) deletes user with that id then adds a new one
+            this causes the linked table in the db to delete all entries that were 
+            linked to a user_id that was saved. That is why we add users_roles entries 
+            */
+            for (UsersRoles role : users_roles.getUsers_roles()){
+                usersRolesRepository.deleteById(role.getId());
+                userRepository.save(user); // Save user first
+                 usersRolesRepository.save(role);
+            }
 
         return "redirect:user_info";
     }
