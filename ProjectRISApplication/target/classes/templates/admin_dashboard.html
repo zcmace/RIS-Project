@@ -353,6 +353,10 @@
                 $('#AppointmentOrderInput').val($(appointmentRow).find('.data-order').val());
                 $('#AppointmentRadiologistInput').val($(appointmentRow).find('.data-radiologist').val());
                 $('#AppointmentTechnicianInput').val($(appointmentRow).find('.data-technician').val());
+                $('#AppointmentEnrolleeNameInput').val($(appointmentRow).find('.data-enrolleename').val());
+                $('#AppointmentEnrolleeIdInput').val($(appointmentRow).find('.data-enrolleeid').val());
+                $('#AppointmentIssuerInput').val($(appointmentRow).find('.data-issuer').val());
+
 
                 $('#AppointmentModalTitle').html('Appointment Overview')
             });
@@ -834,6 +838,22 @@
                                         <option th:each="technician : ${technicians_list}" th:value="${technician.getUser_id()}" th:text="${technician.getFull_name()}"></option>
                                     </select>
                                 </div>
+                                <div class="col-sm-12">
+                                    <h4>Insurance Info</h4>
+                                    <hr>
+                                </div>
+                                <div class="col-sm-3 pad-input">
+                                    <label for="AppointmentEnrolleeNameInput">Enrollee Name:</label>
+                                    <input type="text" class="form-control" id="AppointmentEnrolleeNameInput" th:field="${appointment.enrolleename}" placeholder="Enrollee Name">
+                                </div>
+                                <div class="col-sm-3 pad-input">
+                                    <label for="AppointmentEnrolleeIdInput">Enrollee Id:</label>
+                                    <input type="text" class="form-control" id="AppointmentEnrolleeIdInput" th:field="${appointment.enrolleeid}" placeholder="Enrollee Id">
+                                </div>
+                                <div class="col-sm-3 pad-input">
+                                    <label for="AppointmentIssuerInput">Issuer:</label>
+                                    <input type="text" class="form-control" id="AppointmentIssuerInput" th:field="${appointment.issuer}" placeholder="Issuer">
+                                </div>
                             </div>
                         </div>
                         <br>
@@ -1263,6 +1283,9 @@
                                         <input type="hidden" class="data-time" th:value="${appointment.getTime()}">
                                         <input type="hidden" class="data-radiologist" th:value="${appointment.getRadiologist()}">
                                         <input type="hidden" class="data-technician" th:value="${appointment.getTechnician()}">
+                                        <input type="hidden" class="data-enrolleename" th:value="${appointment.getEnrolleename()}">
+                                        <input type="hidden" class="data-enrolleeid" th:value="${appointment.getEnrolleeid()}">
+                                        <input type="hidden" class="data-issuer" th:value="${appointment.getIssuer()}">
                                     </td>
                                 </tr>
                             </tbody>
