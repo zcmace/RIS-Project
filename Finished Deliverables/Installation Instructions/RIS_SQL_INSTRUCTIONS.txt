@@ -46,6 +46,9 @@ CREATE TABLE IF NOT EXISTS `db_ris`.`appointments` (
   `technician` INT NULL DEFAULT NULL,
   `phone_number` VARCHAR(25) NULL DEFAULT NULL,
   `email_address` VARCHAR(50) NULL DEFAULT NULL,
+  `enrollee_name` VARCHAR(50) NULL DEFAULT NULL,
+  `enrollee_id` VARCHAR(50) NULL DEFAULT NULL,
+  `issuer` VARCHAR(50) NULL DEFAULT NULL,
   `checked_in` BIT(1) NULL DEFAULT NULL,
   `closed` BIT(1) NULL DEFAULT NULL,
   PRIMARY KEY (`appointment_id`))
