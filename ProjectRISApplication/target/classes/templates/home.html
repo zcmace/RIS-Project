@@ -214,16 +214,20 @@
                                     <hr>
                                 </div>
                                 <div class="col-sm-4 pad-input">
-                                    <label for="InsuranceEnrolleeNameInput">Enrollee Name:</label>
-                                    <input type="text" class="form-control" id="InsuranceEnrolleeNameInput" placeholder="Enrollee Name" readonly>
+                                    <label for="AppointmentEnrolleeNameInput">Enrollee Name:</label>
+                                    <input type="text" class="form-control" id="AppointmentEnrolleeNameInput" th:field="${appointment.enrolleename}" placeholder="Enrollee Name">
                                 </div>
                                 <div class="col-sm-4 pad-input">
-                                    <label for="InsuranceEnrolleeIDInput">Enrollee ID:</label>
-                                    <input type="text" class="form-control" id="InsuranceEnrolleeIDInput" placeholder="Enrollee ID" readonly>
+                                    <label for="AppointmentEnrolleeIdInput">Enrollee ID:</label>
+                                    <input type="text" class="form-control" id="AppointmentEnrolleeIdInput" th:field="${appointment.enrolleeid}" placeholder="Enrollee ID">
                                 </div>
                                 <div class="col-sm-4 pad-input">
-                                    <label for="InsuranceIssuerInput">Issuer:</label>
-                                    <input type="text" class="form-control" id="InsuranceIssuerInput" placeholder="Issuer" readonly>
+                                    <label for="AppointmentIssuerInput">Issuer:</label>
+                                    <input type="text" class="form-control" id="AppointmentIssuerInput" th:field="${appointment.issuer}" placeholder="Issuer">
+                                </div>
+                                <div class="col-sm-12">
+                                    <h4>Total Cost</h4>
+                                    <hr>
                                 </div>
 
                             </div>
