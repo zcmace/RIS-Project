@@ -21,6 +21,12 @@ public class Appointment {
     private String phonenumber;
     @Column(name = "email_address")
     private String emailaddress;
+    @Column(name = "enrollee_name")
+    private String enrolleename;
+    @Column(name = "enrollee_id")
+    private String enrolleeid;
+    @Column(name = "issuer")
+    private String issuer;
     @Column(name = "checked_in")
     private int checkedin;
     private int closed;
@@ -76,6 +82,18 @@ public class Appointment {
 
     public String getEmailaddress(){
         return this.emailaddress;
+    }
+
+    public String getEnrolleename(){
+        return this.enrolleename;
+    }
+
+    public String getEnrolleeid(){
+        return this.enrolleeid;
+    }
+
+    public String getIssuer(){
+        return this.issuer;
     }
 
     public String getDate(){
@@ -147,6 +165,18 @@ public class Appointment {
 
     public void setEmailaddress(String emailaddress){
         this.emailaddress = emailaddress;
+    }
+
+    public void setEnrolleename(String enrolleename){
+        this.enrolleename = enrolleename;
+    }
+
+    public void setEnrolleeid(String enrolleeid){
+        this.enrolleeid = enrolleeid;
+    }
+
+    public void setIssuer(String issuer){
+        this.issuer = issuer;
     }
 
     public void setDate(String date){
