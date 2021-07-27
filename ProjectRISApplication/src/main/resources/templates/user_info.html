@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html
+  xmlns:th="https://www.thymeleaf.org"
+  xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+>
+  <head>
+    <title>User Login</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <script
+      src="https://code.jquery.com/jquery-3.6.0.js"
+      integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+      crossorigin="anonymous"
+    ></script>
+    <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+      integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+      integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
+      crossorigin="anonymous"
+    ></script>
+
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.css"
+    />
+    <script
+      type="text/javascript"
+      charset="utf8"
+      src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.js"
+    ></script>
+
+    <link rel="stylesheet" href="/css/styles.css" />
+  </head>
+  <script></script>
+  <body>
+    <div class="container" id="ContentWrapper">
+      <div class="row">
+        <!--      NAVBAR      -->
+        <div class="col-sm-12 sn-navbar">
+          <div class="sn-navbar-btn" onclick="window.location='/home'">
+            Home
+          </div>
+          <div class="sn-navbar-btn" onclick="window.location='/user_info'">
+            User Info
+          </div>
+          <div
+            sec:authorize="hasAuthority('ADMIN')"
+            class="sn-navbar-btn"
+            onclick="window.location='/admin/dashboard'"
+          >
+            Admin
+          </div>
+          <div
+            sec:authorize="hasAnyAuthority('ADMIN', 'REFERRAL_DOCTOR')"
+            class="sn-navbar-btn"
+            onclick="window.location='/referral'"
+          >
+            Referrals
+          </div>
+          <div
+            sec:authorize="hasAnyAuthority('ADMIN', 'RECEPTIONIST', 'TECHNICIAN', 'RADIOLOGIST')"
+            class="sn-navbar-btn"
+            onclick="window.location='/appointments'"
+          >
+            Appointments
+          </div>
+          <div
+            sec:authorize="hasAnyAuthority('ADMIN', 'RECEPTIONIST', 'RADIOLOGIST')"
+            class="sn-navbar-btn"
+            onclick="window.location='/orders'"
+          >
+            Orders
+          </div>
+          <div
+            class="sn-navbar-btn"
+            style="float: right"
+            onclick="window.location='/user_logout'"
+          >
+            Logout
+          </div>
+          <div class="sn-navbar-user" style="float: right">
+            Logged in: <span sec:authentication="name">Username</span>
+          </div>
+        </div>
+        <div>
+            <span th:text="${user.getFull_name()}">Full Name</span>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

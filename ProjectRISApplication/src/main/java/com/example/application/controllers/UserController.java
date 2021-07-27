@@ -327,7 +327,16 @@ public class UserController {
 
         return "home";
     }
-
+    @GetMapping("/user_info")
+    public String userInfoView(HttpSession session, Model model){
+        Authentication loggedInUser = SecurityContextHolder.getContext().getAuthentication();
+        User currentUser = userRepository.getUserByUsername(loggedInUser.getName());
+    
+        model.addAttribute("user", currentUser );
+        System.out.println("user_info");
+       
+        return "user_info";
+    }
     @GetMapping("/appointments")
     public String getAppointments(Model model) 
     {
