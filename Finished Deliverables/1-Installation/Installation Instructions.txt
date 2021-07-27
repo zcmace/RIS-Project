@@ -4,17 +4,27 @@ Pre-Installation Requirements:
 
 -JDK 11 or later
 -Apache Maven 3.6 or later
--MySQL 8 or later
+-MySQL 8 or later (MySQL Workbench and MySQL Server atleast)
 -VisualStudio Code
 --Extension(s): Java Extension Pack
 
 Installation Instructions:
--Download the zip file located at: https://github.com/sethgnurmi/ProjectRIS
--Extract contents to desired root location.
+-In VisualStudioCode select from the Navbar at top of screen View > Command Palette...
+-In the Command Palette type 'Git: Clone' and press Enter
+-In the text prompt that appears, input https://github.com/zcmace/RIS-Project.git as the URL and press Enter
+-Select the desired root location for the project folder.
 -Open MySQL Workbench and configure desired host.
 -Open a new SQL Query and enter the contents of the file name "RIS_SQL_Commands.txt" found in the Installation folder directory.
 -Run the SQL query to initialize the RIS database.
 -Open Visual Studio Code and then navigate to root location.
+-Navigate to application.properties (ProjectRISApplication\src\main\resources\application.properties)
+--input the correct username and password for the user in your SQL server in the property fields for spring.datasource.username and spring.datasource.password
+--input the correct jdbc string. This can be found by right clicking on a connection on the home screen in MySQL Workbench and selecting "Copy JDBC Connection string"
+--ensure that the correct database is selected by placing the schema name before the '?' in the JDBC String
+--example: jdbc:mysql://localhost:3306/db_ris?user=root
+--If these steps are not completed correctly JPA.Hibernate will not be able to establish a connection to the SQL Server and your application will crash.
 -Navigate to Application.java (ProjectRISApplication\src\main\java\com\example\application\Application.java)
 -Run file by clicking on run icon above main class, by pressing F5 or by navigating to Run > Run with Debugging
 -Open web browser and navigate to localhost:8080/login
+
+-Make sure to complete initial setup instructions found in the User Manual section 2.Modality and Patient Alerts Setup within the Finished Deliverables folder.

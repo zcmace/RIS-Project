@@ -251,7 +251,8 @@ SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 
-//this will add default roles 
+##this will add default roles 
+
 INSERT INTO `db_ris`.`roles`
 (`role_id`,
 `name`)
@@ -277,7 +278,8 @@ INSERT INTO `db_ris`.`roles`
 `name`)
 VALUES (6,'RADIOLOGIST');
 
-// This will default add users
+## This will default add users
+
 INSERT INTO `db_ris`.`users`
 (`user_id`,
 `email`,
@@ -369,7 +371,8 @@ VALUES
 1);
 
 
-//this will link the users to their roles
+##this will link the users to their roles
+
 INSERT INTO `db_ris`.`users_roles`
 (`user_id`,
 `role_id`,
