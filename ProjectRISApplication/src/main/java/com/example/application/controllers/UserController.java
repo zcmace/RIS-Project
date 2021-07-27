@@ -7,17 +7,23 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.validation.BindingResult;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.security.Principal;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Optional;
+import java.util.Set;
+import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
@@ -31,6 +37,8 @@ import com.example.application.persistence.OrderStatus;
 import com.example.application.persistence.Patient;
 import com.example.application.persistence.Role;
 import com.example.application.persistence.User;
+import com.example.application.persistence.UsersRoles;
+import com.example.application.persistence.UsersRolesList;
 import com.example.application.repositories.AlertRepository;
 import com.example.application.repositories.AppointmentRepository;
 import com.example.application.repositories.DiagnosticRepository;
@@ -41,17 +49,21 @@ import com.example.application.repositories.OrderStatusRepository;
 import com.example.application.repositories.PatientRepository;
 import com.example.application.repositories.PatientsAlertsRepository;
 import com.example.application.repositories.UserRepository;
+import com.example.application.repositories.UsersRolesRepository;
 import com.example.application.security.AppUserDetails;
 
 @Controller 
 public class UserController {
-
+    @Autowired
+    PasswordEncoder passwordEncoder;
     @Autowired
     private OrderRepository orderRepository;
     @Autowired
     private PatientRepository patientRepository;
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private UsersRolesRepository usersRolesRepository;
     @Autowired
     private AppointmentRepository appointmentRepository;
     @Autowired
@@ -333,10 +345,61 @@ public class UserController {
         User currentUser = userRepository.getUserByUsername(loggedInUser.getName());
     
         model.addAttribute("user", currentUser );
+        model.addAttribute("user_roles", new UsersRolesList());
         System.out.println("user_info");
-       
+        System.out.println(currentUser.getRoles());
         return "user_info";
     }
+
+    @PostMapping("/updateUserInfo")
+    public String updateUser(@ModelAttribute("user") User user, @ModelAttribute("roles") UsersRolesList users_roles,
+            Model model, BindingResult result) {
+        user.setEnabled(true);
+        //next couple lines should make a usable userRolesList for the user. after update info roles should
+        Iterable<UsersRoles> rolesrepo = usersRolesRepository.findAll();
+        List<UsersRoles> list = new LinkedList<>();
+
+        for (UsersRoles ur : rolesrepo){
+            if (ur.getUserid() == user.getUser_id()){
+                list.add(ur);
+            }
+        }
+        //this puts current users_roles as a list into a UsersRolesList object
+        users_roles.setUsers_roles(list);
+
+        
+
+
+            Optional<User> find_user = userRepository.findById(user.getUser_id());
+            if (find_user.isPresent()) // Find current user
+            {
+                if (user.getPassword().isEmpty()) // See if we are changing the password
+                {
+                    user.setPassword(find_user.get().getPassword()); // If not, use old password
+                } else {
+                    user.setPassword(passwordEncoder.encode(user.getPassword())); // If so, encode new password
+                }
+            }
+
+          
+            //in the list provided by the users_rolesList object
+            //we delete the role first, save the user object
+            //then add the user_roles object one at a time
+
+            /*userRepository.save(user) deletes user with that id then adds a new one
+            this causes the linked table in the db to delete all entries that were 
+            linked to a user_id that was saved. That is why we add users_roles entries 
+            */
+            for (UsersRoles role : users_roles.getUsers_roles()){
+                usersRolesRepository.deleteById(role.getId());
+                userRepository.save(user); // Save user first
+                 usersRolesRepository.save(role);
+            }
+
+        return "redirect:user_info";
+    }
+
+
     @GetMapping("/appointments")
     public String getAppointments(Model model) 
     {
