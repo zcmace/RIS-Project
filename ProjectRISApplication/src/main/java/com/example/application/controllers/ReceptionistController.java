@@ -7,15 +7,26 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+
+
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.MailSendException;
 
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+import java.util.Date;
+import java.util.Locale;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+
 import com.example.application.persistence.Appointment;
 import com.example.application.repositories.AppointmentRepository;
 import com.example.application.repositories.ModalityRepository;
 import com.example.application.repositories.OrderRepository;
+import com.example.application.repositories.UserRepository;
 import com.example.application.persistence.Modality;
 
 @Controller 
@@ -28,11 +39,13 @@ public class ReceptionistController {
     @Autowired
     private ModalityRepository modalityRepository;
 
+    @Autowired UserRepository userRepository;
+
     @Autowired
     PasswordEncoder passwordEncoder;
 
     @Autowired
-    private JavaMailSender emailSender;
+    private BillingService billingService;
 
     @PostMapping("/updateAppointment")
     public String updateAppointment(@ModelAttribute("appointment") Appointment appointment, Model model, BindingResult result)
@@ -49,33 +62,62 @@ public class ReceptionistController {
     @PostMapping("/checkinAppointment")
     public String checkinAppointment(@ModelAttribute("checkin_appointment") Appointment appointment, Model model, BindingResult result)
     {
-        //add method here to send billing statement to patient
-       
+        
+        Appointment thisAppointment = null;
+
+        /*
+        loop through all appointments to match appointment from model to appointment java object
+        This is because the appointment object passed from the model contains just the id
+        */
+
+        Iterable<Appointment> allAppointments = appointmentRepository.findAll();
+        for (Appointment find_appointment : allAppointments){
+            if(find_appointment.getId() == appointment.getId()){
+                thisAppointment = find_appointment;
+            }
+        }
+        
+        //getting the date and time in a better format
+    
+      
+        
         try{
+            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            
+            Date date = formatter.parse(thisAppointment.getDatetime());
+            
+            GregorianCalendar cal = new GregorianCalendar();
+            cal.setTime(date);
+            Locale locale = Locale.getDefault();
+            
+
             Iterable<Modality> modalList = modalityRepository.findAll();
 
             Modality appModality = new Modality();
             for (Modality modality : modalList){
-                if (modality.getId() == appointment.getModality()){
+                if (modality.getId() == thisAppointment.getModality()){
                     appModality = modality;
                 }
             }
-
+        
         SimpleMailMessage message = new SimpleMailMessage(); 
         message.setFrom("radiologyinfosystem@gmail.com");
-        message.setTo(appointment.getEmailaddress()); 
-        message.setSubject("Radiology Billing Statement: " + appointment.getDate()); 
+        message.setTo(thisAppointment.getEmailaddress()); 
+        message.setSubject("Radiology Billing Statement: " + thisAppointment.getDatetime()); 
         message.setText(
-            "Appointment Date: " + appointment.getDate() + "\n" +
-            "Appointment Time: " + appointment.getTime() + "\n" +
-            "Your " + appModality.getName() + "will cost " 
-            + appModality.getPrice() + "\n" +
-            "Please send payment to Radiology Office"
+            "Thank you for choosing our Radiology team! We hope you enjoyed your visit, here is a summary of your recent visit: \n" +
+            "Appointment Date: " + cal.getDisplayName(Calendar.DAY_OF_WEEK, Calendar.LONG, locale) + ", " + cal.getDisplayName(Calendar.MONTH, Calendar.LONG, locale) + " " + cal.get(Calendar.DAY_OF_MONTH) + ", " + cal.get(Calendar.YEAR) + "\n" +
+            "Appointment Time: " + cal.get(Calendar.HOUR) + ":" + cal.get(Calendar.MINUTE) + " " + cal.getDisplayName(Calendar.AM_PM, Calendar.LONG, locale) + "\n" + 
+            "Imaging type: " + appModality.getName() + "\n" +
+            "Total cost of visit: "  + appModality.getPrice() + "\n" +
+            "Please send payment to the Radiology Office"
         
         );
-        emailSender.send(message);
+        billingService.send(message);
         } catch (MailSendException exception) {
             System.out.println(exception.getMessage());
+        } catch(ParseException e){
+            System.out.println(e.getMessage());
         }
         appointmentRepository.setCheckedInForAppointment(appointment.getId());
         return "redirect:/home";
