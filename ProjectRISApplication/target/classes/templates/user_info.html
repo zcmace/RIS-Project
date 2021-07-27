@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html
+  xmlns:th="https://www.thymeleaf.org"
+  xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+>
+  <head>
+    <title>User Login</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <script
+      src="https://code.jquery.com/jquery-3.6.0.js"
+      integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+      crossorigin="anonymous"
+    ></script>
+    <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+      integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+      integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
+      crossorigin="anonymous"
+    ></script>
+
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.css"
+    />
+    <script
+      type="text/javascript"
+      charset="utf8"
+      src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.js"
+    ></script>
+
+    <link rel="stylesheet" href="/css/styles.css" />
+  <script>
+
+    $(document).ready(function(){  
+
+      function userWarning(warning)
+            {
+                $('#UserWarning').show();
+                $('#UserWarningContent').html(warning);
+            }
+  
+      $('body').on('click', '.saveUserButton', function(event){
+                $('#UserWarning').hide();
+                if($('#UserIDInput').val().length > 0)
+                {
+                    if($('#ChangeUserPassword').val() != $('#ConfirmUserPassword').val())
+                    {
+                        userWarning("Passwords must match");
+                        event.preventDefault();
+                    }
+                }
+                else
+                {
+                    if($('#ChangeUserPassword').val() != $('#ConfirmUserPassword').val())
+                    {
+                        userWarning("Passwords must match");
+                        event.preventDefault();
+                    }
+                    if($('#ChangeUserPassword').val().length <= 0)
+                    {
+                        userWarning("Password cannot be empty");
+                        event.preventDefault();
+                    }
+                    if($('#UsernameInput').val().length <= 0)
+                    {
+                        userWarning("Username cannot be empty");
+                        event.preventDefault();
+                    }
+                }
+            });
+
+        $('.user-password').on('keyup', function(){
+                if($('#ChangeUserPassword').val() == $('#ConfirmUserPassword').val())
+                {
+                    $('#PasswordWarning').hide();
+                }
+                else
+                {
+                    $('#PasswordWarning').show();
+                }
+            });
+        });
+  </script>
+  </head>
+  <body>
+    <div class="container" id="ContentWrapper">
+      <div class="row">
+        <!--      NAVBAR      -->
+        <div class="col-sm-12 sn-navbar">
+          <div class="sn-navbar-btn" onclick="window.location='/home'">
+            Home
+          </div>
+          <div class="sn-navbar-btn" onclick="window.location='/user_info'">
+            User Info
+          </div>
+          <div
+            sec:authorize="hasAuthority('ADMIN')"
+            class="sn-navbar-btn"
+            onclick="window.location='/admin/dashboard'"
+          >
+            Admin
+          </div>
+          <div
+            sec:authorize="hasAnyAuthority('ADMIN', 'REFERRAL_DOCTOR')"
+            class="sn-navbar-btn"
+            onclick="window.location='/referral'"
+          >
+            Referrals
+          </div>
+          <div
+            sec:authorize="hasAnyAuthority('ADMIN', 'RECEPTIONIST', 'TECHNICIAN', 'RADIOLOGIST')"
+            class="sn-navbar-btn"
+            onclick="window.location='/appointments'"
+          >
+            Appointments
+          </div>
+          <div
+            sec:authorize="hasAnyAuthority('ADMIN', 'RECEPTIONIST', 'RADIOLOGIST')"
+            class="sn-navbar-btn"
+            onclick="window.location='/orders'"
+          >
+            Orders
+          </div>
+          <div
+            class="sn-navbar-btn"
+            style="float: right"
+            onclick="window.location='/user_logout'"
+          >
+            Logout
+          </div>
+          <div class="sn-navbar-user" style="float: right">
+            Logged in: <span sec:authentication="name">Username</span>
+          </div>
+        </div>
+        <div class="container">
+          <div class="row">
+              <div class="col-sm-12 modal-tile"  id="ModifyUserModal">
+                  <div class="row">
+                      <div class="col-sm-12">
+                          <h1 id="UserModalTitle">User Info for:<p th:text = "${user.getUsername()}" id="HeadingUser" style="float:right;">Username</p></h1>
+                      </div>
+                  </div>
+                  <hr>
+                  <div class="row" id="UserWarning" style="display: none; font-weight: bold;">
+                      <div class="col-sm-12 alert alert-danger" id="UserWarningContent">
+                      </div>
+                  </div>
+                  <br>
+                  <form action="#" th:action="@{/updateUserInfo}" method="post">
+                      <div class="row">
+                          <div class="col-sm-1">
+                              <label for="UserIDInput">ID:</label>
+                              <input type="text" class="form-control" id="UserIDInput" th:field="${user.user_id}" readonly/>
+                          </div>
+                          <div class="col-sm-3">
+                              <label for="UsernameInput">Username:</label>
+                              <input type="text" class="form-control" id="UsernameInput" th:field="${user.username}" readonly/>
+                          </div>
+                          <div class="col-sm-4">
+                              <label for="FullNameInput">Display Name:</label>
+                              <input type="text" class="form-control" id="FullNameInput" th:field="${user.full_name}" placeholder="Full Name"/>
+                          </div>
+                          <div class="col-sm-3">
+                              <label for="UserEmailInput">Email Address:</label>
+                              <input type="text" class="form-control" id="UserEmailInput" th:field="${user.email}" placeholder="example@demo.com"/>
+                          </div>
+                         
+                      </div>
+                      <br>
+                      <div class="row">
+                          <div class="col-sm-7">
+                              <div class="row">
+                                  <div class="col-sm-6">
+                                      <label for="ChangeUserPassword">Change Password:</label>
+                                      <input type="password" class="form-control user-password" id="ChangeUserPassword" th:field="${user.password}"/>
+                                  </div>
+                                  <div class="col-sm-6">
+                                      <label for="ConfirmUserPassword">Confirm Password:</label>
+                                      <input type="password" class="form-control user-password" id="ConfirmUserPassword"/>
+                                  </div>
+                                  <div class="col-sm-12 alert alert-danger" id="PasswordWarning" style="display: none;">
+                                      Passwords do not match.
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                    <br>
+                      <div class="row">
+                          <div class="col-sm-10">
+                              <input type="submit" class="btn btn-md btn-primary saveUserButton" style="float:right; padding-right: 10px;" value="Update Info"/>
+                          </div>
+                      </div>
+                  </form>
+              </div>
+            </div>
+         </div>
+        </div>
+       </div>
+      
+  </body>
+</html>

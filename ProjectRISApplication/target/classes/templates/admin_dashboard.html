@@ -193,7 +193,7 @@
                 $('.form-control').attr('disabled', false);
                 $('.form-control').val('');
 
-                $('#ModalityModalTitle').html('Create New Modality')
+                $('#ModalityModalTitle').html('Create New Modality');
             });
             
             $('body').on('click', '.modalityModifyButton', function(){
@@ -209,8 +209,9 @@
                 $('.form-control').attr('disabled', false);
                 $('#ModalityIdInput').val($(modalityRow).data('id'));
                 $('#ModalityNameInput').val($(modalityRow).data('name'));
+                $('#ModalityPriceInput').val($(modalityRow).data('price'));
 
-                $('#ModalityModalTitle').html('Modality Overview')
+                $('#ModalityModalTitle').html('Modality Overview');
             });
  
             $('body').on('click', '.patientAlertCreateButton', function(){
@@ -221,7 +222,7 @@
                 $('.form-control').attr('disabled', false);
                 $('.form-control').val('');
 
-                $('#PatientAlertModalTitle').html('Create New Patient Alert')
+                $('#PatientAlertModalTitle').html('Create New Patient Alert');
             });
 
             $('body').on('click', '.patientAlertModifyButton', function(){
@@ -238,7 +239,7 @@
                 $('#PatientAlertIdInput').val($(patientAlertRow).data('id'));
                 $('#PatientAlertNameInput').val($(patientAlertRow).data('name'));
 
-                $('#PatientAlertModalTitle').html('Patient Alert Overview')
+                $('#PatientAlertModalTitle').html('Patient Alert Overview');
             });
 
             $('body').on('click', '.patientCreateButton', function(){
@@ -251,7 +252,7 @@
                 $('.alert-value-input').val(0);
                 $('#PatientIdInput').val('');
 
-                $('#PatientModalTitle').html('Create New Patient')
+                $('#PatientModalTitle').html('Create New Patient');
             });
 
             $('body').on('click', '.patientModifyButton', function(){
@@ -284,7 +285,7 @@
                 $('#PatientRaceInput').val($(patientRow).data('race'));
                 $('#PatientEthnicityInput').val($(patientRow).data('ethnicity'));
 
-                $('#PatientModalTitle').html('Patient Overview')
+                $('#PatientModalTitle').html('Patient Overview');
             });
 
             $('body').on('click', '.orderCreateButton', function(){
@@ -295,7 +296,7 @@
                 $('.form-control').attr('disabled', false);
                 $('.form-control').val('');
 
-                $('#OrderModalTitle').html('Create New Order')
+                $('#OrderModalTitle').html('Create New Order');
             });
 
             $('body').on('click', '.orderModifyButton', function(){
@@ -316,7 +317,7 @@
                 $('#OrderModalityInput').val($(orderRow).data('modality'));
                 $('#OrderNotesInput').val($(orderRow).data('notes'));
 
-                $('#OrderModalTitle').html('Order Overview')
+                $('#OrderModalTitle').html('Order Overview');
             });
 
             $('body').on('click', '.appointmentCreateButton', function(){
@@ -330,7 +331,7 @@
                 $('#AppointmentOrderOption').attr('value', '');
                 $('#AppointmentOrderOption').html('');
 
-                $('#AppointmentModalTitle').html('Create New Appointment')
+                $('#AppointmentModalTitle').html('Create New Appointment');
             });
 
             $('body').on('click', '.appointmentModifyButton', function(){
@@ -358,7 +359,7 @@
                 $('#AppointmentIssuerInput').val($(appointmentRow).find('.data-issuer').val());
 
 
-                $('#AppointmentModalTitle').html('Appointment Overview')
+                $('#AppointmentModalTitle').html('Appointment Overview');
             });
 
             $('body').on('click', '.fileUploadCreateButton', function(){
@@ -369,7 +370,7 @@
                 $('.form-control').attr('disabled', false);
                 $('.form-control').val('');
 
-                $('#NewFileUploadModalTitle').html('Create New File Upload')
+                $('#NewFileUploadModalTitle').html('Create New File Upload');
             });
 
             $('body').on('click', '.fileUploadModifyButton', function(){
@@ -388,7 +389,7 @@
                 $('#FileUploadFileTypeInput').val($(fileUploadRow).data('filetype'));
                 $('#FileUploadOrderInput').val($(fileUploadRow).data('order'));
 
-                $('#FileUploadModalTitle').html('File Upload Overview')
+                $('#FileUploadModalTitle').html('File Upload Overview');
             });
             
             $('body').on('click', '.fileUploadDownloadButton', function(){
@@ -405,7 +406,7 @@
 
                 $('#DiagnosticReportOrderOption').attr('value', '');
                 $('#DiagnosticReportOrderOption').html('');
-                $('#DiagnosticReportModalTitle').html('Create New Diagnostic Report')
+                $('#DiagnosticReportModalTitle').html('Create New Diagnostic Report');
             });
 
             $('body').on('click', '.diagnosticReportModifyButton', function(){
@@ -426,7 +427,7 @@
                 $('#DiagnosticReportOrderInput').val($(diagnosticReportRow).data('order'));
                 $('#DiagnosticReportDiagnosticInput').val($(diagnosticReportRow).data('report'));
 
-                $('#FileUploadModalTitle').html('Diagnostic Report Overview')
+                $('#FileUploadModalTitle').html('Diagnostic Report Overview');
             });
             
             $('#PatientDOBInput, #AppointmentDateInput').datepicker({
@@ -571,6 +572,10 @@
                                 <div class="col-sm-4 pad-input">
                                     <label for="ModalityNameInput">Modality Name:</label>
                                     <input type="text" class="form-control" id="ModalityNameInput" th:field="${modality.name}" required>
+                                </div>
+                                <div class="col-sm-4 pad-input">
+                                    <label for="ModalityPriceInput">Modality Price:</label>
+                                    <input type="text" class="form-control" id="ModalityPriceInput" th:field="${modality.price}" required>
                                 </div>
                             </div>
                         </div>
@@ -1022,6 +1027,9 @@
                 <div class="sn-navbar-btn" onclick="window.location='/home'">
                     Home
                 </div>
+                <div class="sn-navbar-btn" onclick="window.location='/user_info'">
+                    User Info
+                </div>
                 <div sec:authorize="hasAuthority('ADMIN')" class="sn-navbar-btn" onclick="window.location='/admin/dashboard'">
                     Admin
                 </div>
@@ -1097,13 +1105,15 @@
                             <tr>
                                 <th>Modality ID</th>
                                 <th>Modality</th>
+                                <th>Modality Price</th>
                                 <th></th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr th:each="modality : ${modalities_list}" th:attr="data-id=${modality.getId()}, data-name=${modality.getName()}">
+                            <tr th:each="modality : ${modalities_list}" th:attr="data-id=${modality.getId()}, data-name=${modality.getName()}, data-price=${modality.getPrice()}">
                                 <td th:text="${modality.getId()}">-1</td>
                                 <td th:text="${modality.getName()}">No Name</td>
+                                <td th:text="${modality.getPrice()}">0.00</td>
                                 <td><p class="view-a modalityModifyButton">Modify</p></td>
                             </tr>
                         </tbody>
