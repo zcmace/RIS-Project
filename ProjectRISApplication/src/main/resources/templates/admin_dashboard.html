@@ -358,6 +358,7 @@
                 $('#AppointmentEnrolleeIdInput').val($(appointmentRow).find('.data-enrolleeid').val());
                 $('#AppointmentIssuerInput').val($(appointmentRow).find('.data-issuer').val());
                 $('#AppointmentModalityInput').val($(appointmentRow).find('.data-modality').val());
+                $('#AppointmentPriceInput').val($(appointmentRow).find('.data-modalityprice').val());
 
 
                 $('#AppointmentModalTitle').html('Appointment Overview');
@@ -846,7 +847,7 @@
                                 </div>
                                 <div class="col-sm-4 pad-input">
                                     <label for="AppointmentModalityInput">Modality:</label>
-                                    <input type="text" class="form-control" id="AppointmentModalityInput" th:field="${appointment.modality}" placeholder="Modality" readonly>
+                                    <input type="text" class="form-control" id="AppointmentModalityInput"  placeholder="Modality" readonly>
                                 </div> 
                                 <div class="col-sm-12">
                                     <h4>Insurance Info</h4>
@@ -863,6 +864,14 @@
                                 <div class="col-sm-3 pad-input">
                                     <label for="AppointmentIssuerInput">Issuer:</label>
                                     <input type="text" class="form-control" id="AppointmentIssuerInput" th:field="${appointment.issuer}" placeholder="Issuer">
+                                </div>
+                                <div class="col-sm-12">
+                                    <h4>Total Cost</h4>
+                                    <hr>
+                                </div>
+                                <div class="col-sm-3 pad-input">
+                                    <label for="AppointmentPriceInput">Total Cost:</label>
+                                    <input type="text" class="form-control" id="AppointmentPriceInput" readonly>
                                 </div>
                             </div>
                         </div>
@@ -1302,6 +1311,7 @@
                                         <input type="hidden" class="data-enrolleeid" th:value="${appointment.getEnrolleeid()}">
                                         <input type="hidden" class="data-issuer" th:value="${appointment.getIssuer()}">
                                         <input type="hidden" class="data-modality" th:value="${appointment.getModalityObject().getName()}">
+                                        <input type="hidden" class="data-modalityprice" th:value="${appointment.getModalityObject().getPrice()}">
                                     </td>
                                 </tr>
                             </tbody>

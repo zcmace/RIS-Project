@@ -109,9 +109,11 @@ public class ReceptionistController {
             "Appointment Date: " + cal.getDisplayName(Calendar.DAY_OF_WEEK, Calendar.LONG, locale) + ", " + cal.getDisplayName(Calendar.MONTH, Calendar.LONG, locale) + " " + cal.get(Calendar.DAY_OF_MONTH) + ", " + cal.get(Calendar.YEAR) + "\n" +
             "Appointment Time: " + cal.get(Calendar.HOUR) + ":" + cal.get(Calendar.MINUTE) + " " + cal.getDisplayName(Calendar.AM_PM, Calendar.LONG, locale) + "\n" + 
             "Imaging type: " + appModality.getName() + "\n" +
-            "Total cost of visit: "  + appModality.getPrice() + "\n" +
-            "Please send payment to the Radiology Office"
-        
+            "Total cost of visit: "  + appModality.getPrice() + "\n\n" +
+            "Insurance Info Used: \n" +
+            "Enrollee Name: " + thisAppointment.getEnrolleename() + "\n" +
+            "Enrollee ID: " + thisAppointment.getEnrolleeid() + "\n" + 
+            "Issuer: " + thisAppointment.getIssuer()
         );
         billingService.send(message);
         } catch (MailSendException exception) {
