@@ -843,6 +843,11 @@
                                         <option th:each="technician : ${technicians_list}" th:value="${technician.getUser_id()}" th:text="${technician.getFull_name()}"></option>
                                     </select>
                                 </div>
+                                <div class="col-sm-4 pad-input">
+                                    <label for="AppointmentModalityInput">Modality:</label>
+                                    <input type="hidden" id="AppointmentModalityInput" th:field="${appointment.modality}">
+                                    <input type="text" class="form-control" id="AppointmentModalityText" readonly>
+                                </div> 
                                 <div class="col-sm-12">
                                     <h4>Insurance Info</h4>
                                     <hr>
