@@ -98,8 +98,8 @@ statuses, "In Progress" and "Concluded". "In Progress" signifies that an appoint
 information for appointments scheduled on this day. Once arrived, patients can be checked-in by selecting "Check-In". This will notify the assigned technician and
 radiologist and place the order in the technicians "Checked-In Appointments" data-table. It will also send a simple billing statement including all relevant information
 to the patients email on file. Unscheduled Orders displays placed orders which have not yet had an appointment
-scheduled to fulfill the order. By selecting "Schedule Appointment", appointment information can be entered including patient contact info, appointment date and time,
-and office info such as assigned radiologist and assigned technician. Additionally, patient identification info is displayed as well as the modality requested. By
+scheduled to fulfill the order. By selecting "Schedule Appointment", appointment information can be entered including patient contact info, appointment date and time, 
+office info such as assigned radiologist and assigned technician, and billing info including total cost of the visit. Additionally, patient identification info is displayed as well as the modality requested. By
 selecting "Schedule Appointment" a new appointment is created and the order is removed from the Unscheduled Orders data-table.
 
 To view all appointments in this RIS system, select the "Appointments" button in the header navbar. From here, all appointment information is displayed in the "All 
