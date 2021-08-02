@@ -99,7 +99,7 @@ public class ReceptionistController {
                     appModality = modality;
                 }
             }
-        
+        //This code creates a message object and inputs the data from the current appointment being checked in 
         SimpleMailMessage message = new SimpleMailMessage(); 
         message.setFrom("radiologyinfosystem@gmail.com");
         message.setTo(thisAppointment.getEmailaddress()); 
@@ -121,6 +121,7 @@ public class ReceptionistController {
         } catch(ParseException e){
             System.out.println(e.getMessage());
         }
+        //use repo object to interface with database
         appointmentRepository.setCheckedInForAppointment(appointment.getId());
         return "redirect:/home";
     }
