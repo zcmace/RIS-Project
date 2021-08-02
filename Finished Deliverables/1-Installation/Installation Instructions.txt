@@ -4,7 +4,7 @@ Pre-Installation Requirements:
 
 -JDK 11 or later
 -Apache Maven 3.6 or later
--MySQL 8 or later (MySQL Workbench and MySQL Server atleast)
+-MySQL 8 Community or later (MySQL Workbench and MySQL Server atleast)
 -VisualStudio Code
 --Extension(s): Java Extension Pack
 
