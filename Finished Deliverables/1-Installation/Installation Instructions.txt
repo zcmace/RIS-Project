@@ -2,7 +2,7 @@ Project RIS Installation Instructions
 
 Pre-Installation Requirements:
 
--OpenJDK 11 or later
+-JDK 11 or later
 -Apache Maven 3.6 or later
 -MySQL 8 Community Installer for Windows (MySQL Workbench and MySQL Server atleast)
 --if on non-windows operating system you must install manually
