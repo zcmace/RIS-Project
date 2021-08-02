@@ -1,6 +1,6 @@
 RIS Deliverables Table of Contents
 
-RIS was developed by Seth Nurmi, Alyssa Dames, Brendan Lopez-Fulbright, Aaron Velazquez and John Rudowicz during the Spring 2021 semester
+RIS was debugged and extended by Andrew Davis, Kevin Freyre, Cole Ledford, and Zach Mace during the Summer 2021 semester
 for Dr. Salimi and CSCI 3300 at the University of North Georgia, Dahlonega Campus
 
 
@@ -25,7 +25,7 @@ develop this project.
 
 4-ProjectSchedule
 
-This folder contains one (1) document. "Schedule-Team-8" lists the project plan and schedule items, as well as beginning and due date, responsible
+This folder contains one (1) document. "Schedule-Team-3" lists the project plan and schedule items, as well as beginning and due date, responsible
 team member, and inputs and outputs. This document also shows a graph based on project timeline and was used to assess project progress throughout
 the course of development. The final page should assigned team member responsiblities as well as notes and other general information.
 
@@ -41,8 +41,8 @@ architecture model, and detailed system model.
 6-SupplementaryDiagrams
 
 This folder contains four (4) documents. "DatabaseEntityRelationshipDiagram" displays the production database and associated relationships between
-tables. "JavaClassDiagram" displays the structure of all java classes used in this project including instance variables, constructors, and methods.
-"ProcessFlowChart" displays every valid use case for the system and details the expected process based on UserRole. "SystemArchitecture" displays
+tables. "JavaClassDiagrams" displays the structure of all java classes used in this project including instance variables, constructors, and methods.
+"SystemFlowChart" displays every valid use case for the system and details the expected process based on UserRole. "SystemArchitecture" displays
 the architecture of the system including the interactions between various systems and which files are responsible.
 
 
@@ -60,8 +60,8 @@ that the tool served. Tools range from development tools to graphing tools to co
 
 9-MeetingMinutes
 
-This folder contains nineteen (19) documents. "Agenda and Minutes[Meeting number and date]" details standup meeting notes, decisions reached, and
-action items. "Status Update [Meeting number]" details the status update at various point throughout the course of the project.
+This folder contains nineteen (5) documents. "Agenda and Minutes[Meeting number, team, and date]" details decisions reached and
+action items reached during weekly status updates.
 
 
 10-LessonsLearned
@@ -72,4 +72,4 @@ include things that went well and things that could be improved.
 
 11-PresentationSlides
 
-This folder contains one (1) document. "Radiology Information System" includes in pdf form the final project presentation.
+This folder contains one (1) document. "Radiology Presentation Slides" includes in pdf form the final project presentation.
