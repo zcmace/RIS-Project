@@ -1,2 +1,0 @@
-commit for ris-8
-change for jira test
